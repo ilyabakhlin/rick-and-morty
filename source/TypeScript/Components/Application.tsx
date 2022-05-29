@@ -6,16 +6,14 @@ type Character = {
 }
 
 type Characters = {
-    info: Information,
+    info: {
+        count: number,
+        next: string
+        pages: number,
+        prev: string,
+    },
     results: Character[]
 }
-
-type Information = {
-    count: number,
-    next: string
-    pages: number,
-    prev: string,
-};
 
 export function Application(): JSX.Element {
     const [characters, setCharacters] = useState<Characters>({
@@ -29,10 +27,10 @@ export function Application(): JSX.Element {
     });
 
     useEffect((): void => {
-        window.fetch("https://rickandmortyapi.com/api/character").then((response): Promise<Characters> => {
+        window.fetch("https://rickandmortyapi.com/api/character").then((response: Response): Promise<Characters> => {
             return response.json();
-        }).then((json: Characters): void => {
-            setCharacters(json);
+        }).then((characters: Characters): void => {
+            setCharacters(characters);
         });
     }, []);
 
