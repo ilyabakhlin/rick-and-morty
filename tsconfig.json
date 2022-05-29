@@ -2,6 +2,8 @@
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "alwaysStrict": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
         "jsx": "react",
         "module": "ES6",
         "moduleResolution": "Node",

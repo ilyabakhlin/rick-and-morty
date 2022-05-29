@@ -1,7 +1,10 @@
 import React from "react";
+import { NavBar } from "../Components/NavBar";
 
 export function Home(): JSX.Element {
     return (
-        <p>Home</p>
+        <div>
+            <NavBar/>
+        </div>
     );
 }
