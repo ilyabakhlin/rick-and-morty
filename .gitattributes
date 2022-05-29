@@ -1,0 +1,6 @@
+# Git
+.gitattributes text eol=lf export-ignore
+.gitignore text eol=lf export-ignore
+
+# JSON
+*.json text eol=lf
