@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { NavBar } from "../Components/NavBar";
 
 type Character = {
@@ -8,7 +9,8 @@ type Character = {
         name: string,
         url: string
     },
-    name: string
+    name: string,
+    status: string
 }
 
 type Characters = {
@@ -53,9 +55,14 @@ export function Characters(): JSX.Element {
                             <div className={"col"} key={character.id}>
                                 <div className={"card h-100"}>
                                     <img alt={character.image} className={"card-img-top"} src={character.image}/>
-                                    <div className={"card-body"}>
-                                        <h5 className={"card-title"}>{character.name}</h5>
-                                        <p className={"card-text"}>{character.location.name}</p>
+                                    <div className={"d-flex flex-column card-body justify-content-between"}>
+                                        <div className="card-description">
+                                            <h5 className={"card-title"}>{character.name}</h5>
+                                            <h6 className="card-subtitle text-muted">{character.status}</h6>
+                                            <p className={"card-text"}>{character.location.name}</p></div>
+                                        <div className="card-button d-grid d-block mt-2">
+                                            <Link className={"btn btn btn-primary"} to={`/characters/${character.id}`}>View</Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
