@@ -34,20 +34,44 @@ export function Characters(): JSX.Element {
         results: [],
     });
 
+    const [pageCurrent, setPageCurrent] = useState(0);
+
+    const [pageNext, setPageNext] = useState(0);
+
+    const [pagePrevious, setPagePrevious] = useState(0);
+
     const [searchParameters] = useSearchParams({
         page: "1",
     });
 
     useEffect((): void => {
-        window.fetch(`https://rickandmortyapi.com/api/character?page=${searchParameters.get("page")}`).then((response: Response): Promise<Characters> => {
-            return response.json();
-        }).then((characters: Characters): void => {
-            setCharacters(characters);
-        });
+        const page: string = searchParameters.get("page") as string; // IMPROVE: Remove the type casting.
+        const pageRegExp: RegExp = /^\d+$/;
 
-        window.scrollTo({behavior: "smooth", top: 0});
+        if (pageRegExp.exec(page)) {
+            const url = `https://rickandmortyapi.com/api/character?page=${page}`;
+
+            window.fetch(url).then((response: Response): Promise<Characters> => {
+                return response.json();
+            }).then((characters: Characters): void => {
+                setCharacters(characters);
+                setPageCurrent(parseInt(page));
+            });
+
+            window.scrollTo({behavior: "smooth", top: 0});
+        } else {
+            // TODO: Add some error handling.
+        }
     }, [
         searchParameters.get("page"),
+    ]);
+
+    useEffect((): void => {
+        setPageNext(pageCurrent < characters.info.pages ? pageCurrent + 1 : characters.info.pages);
+        setPagePrevious(pageCurrent > 1 ? pageCurrent - 1 : 1);
+    }, [
+        characters.info.pages,
+        pageCurrent,
     ]);
 
     return (
@@ -79,10 +103,10 @@ export function Characters(): JSX.Element {
                         <nav aria-label="Page navigation example">
                             <ul className="pagination">
                                 <li className="page-item">
-                                    <Link className={"page-link"} to={`/characters?page=2`}>Previous</Link>
+                                    <Link className={"page-link"} to={`/characters?page=${pagePrevious}`}>Previous</Link>
                                 </li>
                                 <li className="page-item">
-                                    <Link className={"page-link"} to={`/characters?page=3`}>Next</Link>
+                                    <Link className={"page-link"} to={`/characters?page=${pageNext}`}>Next</Link>
                                 </li>
                             </ul>
                         </nav>
