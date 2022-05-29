@@ -47,11 +47,11 @@ export function Characters(): JSX.Element {
         <div>
             <NavBar/>
             <div className={"container"}>
-                <div className={"row"}>
+                <div className={"g-4 m-0 row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-5"}>
                     {characters.results.map((character: Character): JSX.Element => {
                         return (
                             <div className={"col"} key={character.id}>
-                                <div className={"card"}>
+                                <div className={"card h-100"}>
                                     <img alt={character.image} className={"card-img-top"} src={character.image}/>
                                     <div className={"card-body"}>
                                         <h5 className={"card-title"}>{character.name}</h5>
