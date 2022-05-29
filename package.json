@@ -1,5 +1,8 @@
 {
     "devDependencies": {
+        "@types/react-dom": "^18.0.5",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0",
         "ts-loader": "^9.3.0",
         "typescript": "^4.7.2",
         "webpack": "^5.72.1",
@@ -7,6 +10,11 @@
     },
     "name": "rickandmorty",
     "license": "GPL-3.0-or-later",
+    "scripts": {
+        "build": "webpack --config ./webpack.js",
+        "dev": "webpack --config ./webpack.js --mode development",
+        "watch": "webpack --config ./webpack.js --mode development --watch"
+    },
     "private": true,
     "version": "0.0.0"
 }

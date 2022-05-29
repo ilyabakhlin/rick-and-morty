@@ -1,9 +1,11 @@
 {
     "compilerOptions": {
         "alwaysStrict": true,
+        "jsx": "react",
         "module": "ES6",
+        "moduleResolution": "Node",
+        "sourceMap": true,
         "strict": true,
-        "target": "ES5",
-        "sourceMap": true
+        "target": "ES5"
     }
 }
