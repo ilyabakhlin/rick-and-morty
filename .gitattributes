@@ -5,5 +5,11 @@
 # HTML
 *.html text eol=lf
 
+# JavaScript
+*.js text eol=lf
+
 # JSON
 *.json text eol=lf
+
+# TypeScript
+*.tsx text eol=lf

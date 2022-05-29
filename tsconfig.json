@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "module": "ES6",
+        "strict": true,
+        "target": "ES5",
+        "sourceMap": true
+    }
+}
