@@ -2,5 +2,8 @@
 .gitattributes text eol=lf export-ignore
 .gitignore text eol=lf export-ignore
 
+# HTML
+*.html text eol=lf
+
 # JSON
 *.json text eol=lf
