@@ -18,9 +18,9 @@ type Characters = {
 export function Application(): JSX.Element {
     const [characters, setCharacters] = useState<Characters>({
         info: {
-            count: 0,
+            count: 826,
             next: "",
-            pages: 0,
+            pages: 42,
             prev: "",
         },
         results: [],
@@ -32,7 +32,10 @@ export function Application(): JSX.Element {
         }).then((characters: Characters): void => {
             setCharacters(characters);
         });
-    }, []);
+    }, [
+        characters.info.count,
+        characters.info.pages,
+    ]);
 
     return (
         <ul>
