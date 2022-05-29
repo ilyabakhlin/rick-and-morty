@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { NavBar } from "../Components/NavBar";
 
 type Character = {
@@ -26,30 +26,35 @@ type Characters = {
 export function Characters(): JSX.Element {
     const [characters, setCharacters] = useState<Characters>({
         info: {
-            count: 826,
+            count: 0,
             next: "",
-            pages: 42,
+            pages: 0,
             prev: "",
         },
         results: [],
     });
 
+    const [searchParameters] = useSearchParams({
+        page: "1",
+    });
+
     useEffect((): void => {
-        window.fetch("https://rickandmortyapi.com/api/character").then((response: Response): Promise<Characters> => {
+        window.fetch(`https://rickandmortyapi.com/api/character?page=${searchParameters.get("page")}`).then((response: Response): Promise<Characters> => {
             return response.json();
         }).then((characters: Characters): void => {
             setCharacters(characters);
         });
+
+        window.scrollTo({behavior: "smooth", top: 0});
     }, [
-        characters.info.count,
-        characters.info.pages,
+        searchParameters.get("page"),
     ]);
 
     return (
         <div>
             <NavBar/>
             <div className={"container"}>
-                <div className={"g-4 m-0 row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-5"}>
+                <div className={"g-4 mb-4 mt-0 row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-5"}>
                     {characters.results.map((character: Character): JSX.Element => {
                         return (
                             <div className={"col"} key={character.id}>
@@ -68,6 +73,20 @@ export function Characters(): JSX.Element {
                             </div>
                         );
                     })}
+                </div>
+                <div className={"row"}>
+                    <div className={"col"}>
+                        <nav aria-label="Page navigation example">
+                            <ul className="pagination">
+                                <li className="page-item">
+                                    <Link className={"page-link"} to={`/characters?page=2`}>Previous</Link>
+                                </li>
+                                <li className="page-item">
+                                    <Link className={"page-link"} to={`/characters?page=3`}>Next</Link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
