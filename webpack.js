@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+    devtool: "source-map",
     entry: "./source/TypeScript/index.tsx",
     mode: "production",
     module: {
