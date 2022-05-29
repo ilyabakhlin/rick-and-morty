@@ -38,15 +38,13 @@ export function Location(properties: Properties): JSX.Element {
     ]);
 
     return (
-        <div className={"row"}>
-            <div className={"col"}>
-                <h3>Location</h3>
-                <ul>
-                    <li><strong>Name:</strong> {location.name}</li>
-                    <li><strong>Type:</strong> {location.type}</li>
-                    <li><strong>Dimension:</strong> {location.dimension}</li>
-                </ul>
-            </div>
+        <div className={"col"}>
+            <h3>Location</h3>
+            <ul>
+                <li><strong>Name:</strong> {location.name}</li>
+                <li><strong>Type:</strong> {location.type}</li>
+                <li><strong>Dimension:</strong> {location.dimension}</li>
+            </ul>
         </div>
     );
 }

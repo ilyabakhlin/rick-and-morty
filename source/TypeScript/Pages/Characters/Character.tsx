@@ -88,8 +88,10 @@ export function Character(): JSX.Element {
                         </ul>
                     </div>
                 </div>
-                <Origin name={character.origin.name} url={character.origin.url}/>
-                <Location name={character.location.name} url={character.location.url}/>
+                <div className={"row"}>
+                    <Origin name={character.origin.name} url={character.origin.url}/>
+                    <Location name={character.location.name} url={character.location.url}/>
+                </div>
             </div>
         </div>
     );
