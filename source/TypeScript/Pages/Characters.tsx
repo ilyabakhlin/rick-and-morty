@@ -48,7 +48,7 @@ export function Characters(): JSX.Element {
         const page: string = searchParameters.get("page") as string; // IMPROVE: Remove the type casting.
         const pageRegExp: RegExp = /^\d+$/;
 
-        if (pageRegExp.exec(page)) {
+        if (pageRegExp.test(page)) {
             const url = `https://rickandmortyapi.com/api/character?page=${page}`;
 
             window.fetch(url).then((response: Response): Promise<Characters> => {
@@ -84,11 +84,12 @@ export function Characters(): JSX.Element {
                             <div className={"col"} key={character.id}>
                                 <div className={"card h-100"}>
                                     <img alt={character.image} className={"card-img-top"} src={character.image}/>
-                                    <div className={"d-flex flex-column card-body justify-content-between"}>
+                                    <div className={"card-body d-flex flex-column justify-content-between"}>
                                         <div className="card-description">
                                             <h5 className={"card-title"}>{character.name}</h5>
                                             <h6 className="card-subtitle text-muted">{character.status}</h6>
-                                            <p className={"card-text"}>{character.location.name}</p></div>
+                                            <p className={"card-text"}>{character.location.name}</p>
+                                        </div>
                                         <div className="card-button d-grid d-block mt-2">
                                             <Link className={"btn btn btn-primary"} to={`/characters/${character.id}`}>View</Link>
                                         </div>

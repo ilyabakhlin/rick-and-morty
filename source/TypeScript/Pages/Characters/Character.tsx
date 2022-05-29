@@ -23,8 +23,6 @@ type Character = {
 }
 
 export function Character(): JSX.Element {
-    const params: Params = useParams();
-
     const [character, setCharacter] = useState<Character>({
         gender: "",
         id: 0,
@@ -43,23 +41,23 @@ export function Character(): JSX.Element {
         type: "",
     });
 
+    const params: Params = useParams();
+
     useEffect((): void => {
         const characterIdRegExp = /^\d+$/;
 
-        if (typeof params.id === "string") {
-            if (characterIdRegExp.test(params.id)) {
-                window.fetch(`https://rickandmortyapi.com/api/character/${params.id}`).then((response: Response): Promise<Character> => {
-                    if (response.status === 200) {
-                        return response.json();
-                    } else {
-                        throw new Error(`Error ${response.status}: ${response.statusText}`);
-                    }
-                }).then((character: Character): void => {
-                    setCharacter(character);
-                }).catch((error: Error): void => {
-                    window.console.error(error.message);
-                });
-            }
+        if (typeof params.id === "string" && characterIdRegExp.test(params.id)) {
+            window.fetch(`https://rickandmortyapi.com/api/character/${params.id}`).then((response: Response): Promise<Character> => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                }
+            }).then((character: Character): void => {
+                setCharacter(character);
+            }).catch((error: Error): void => {
+                window.console.error(error.message);
+            });
         }
     }, [
         params.id,
@@ -90,16 +88,8 @@ export function Character(): JSX.Element {
                         </ul>
                     </div>
                 </div>
-                <div className={"row"}>
-                    <div className={"col"}>
-                        <Origin name={character.origin.name} url={character.origin.url}/>
-                    </div>
-                </div>
-                <div className={"row"}>
-                    <div className={"col"}>
-                        <Location name={character.location.name} url={character.location.url}/>
-                    </div>
-                </div>
+                <Origin name={character.origin.name} url={character.origin.url}/>
+                <Location name={character.location.name} url={character.location.url}/>
             </div>
         </div>
     );
